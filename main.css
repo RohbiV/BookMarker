@@ -1,0 +1,91 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.outerbox{
+    width: 40%;
+    margin: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.head{
+    color: rgb(154, 151, 151);
+    font-size: x-large;
+    margin: 25px;
+}
+
+hr{
+    margin-bottom: 30px;
+    width: 100%;
+    color: rgb(154, 151, 151);
+}
+
+.inputcontainer{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 25px;
+    background-color: rgba(205, 193, 193, 0.29);
+    min-height: 30vh;
+}
+
+.inputcontainer h1{
+    margin-bottom: 20px;
+}
+
+.inputcontainer  label{
+    font-size: large;
+}
+.inputcontainer input[type="text"] {
+    width: 80%;
+    height: 2.2rem;
+    margin: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#submit{
+    width: 10%;
+    height: 2.5rem;
+    border: none;
+    background-color: rgba(1, 65, 255, 0.726);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.items{
+    padding: 10px;
+    width: 90%;
+    min-height: 4rem;
+    font-size: x-large;
+    display: grid;
+    grid-template-columns: auto 10% 10%;
+    gap: 10px;
+    align-items: center;
+    background-color:rgba(205, 193, 193, 0.29);
+}
+
+.items > button:nth-child(1) {
+    background-color: rgba(255, 255, 255, 0.823);
+    border-radius: 10px;
+    height: 2.5rem;
+}
+.items > button:nth-child(2) {
+    background-color: rgba(255, 0, 0, 0.823);
+    border-radius: 10px;
+    height: 2.5rem;
+    margin-right: 5px;
+}
+
+.foot{
+    margin-top: 100px;
+    align-self: flex-start;
+}
