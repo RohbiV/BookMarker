@@ -8,6 +8,7 @@ const container = document.querySelector(".inputcontainer");
 const outerbx = document.querySelector(".outerbox");
 
 let siteName, URLName;
+let bookmarks = [];
 
 inputSite.addEventListener("keyup", (e) => {
     siteName = inputSite.value;
@@ -35,6 +36,11 @@ inputURL.addEventListener("keyup", (e) => {
 // };
 
 const createBookmark = () => {
+    if(!siteName || !URLName){
+        alert("Enter proper values!");
+        return;
+    }
+
     const div = document.createElement("div"); //creating the upper div
 
     const divText = document.createTextNode(siteName); //creating item name
@@ -60,19 +66,8 @@ const createBookmark = () => {
         e.target.parentNode.remove();
     });
 
-    storeElem();
 
     
-};
-
-let bookmark;
-
-const storeElem = () =>{
-    bookmark = {    //storing in objects for further loading as object on local storage
-        websitename: siteName,
-        siteurl: URLName
-    };
-    saveData(bookmark);
 };
 
 btn.addEventListener("click", () => {
@@ -87,42 +82,45 @@ btn.addEventListener("click", () => {
     }
 
     createBookmark();
+    storeElem();
     inputSite.value = "";
     inputURL.value = "";
 });
-let  bookmarks;
-const saveData = (bookmark) => {     //storing data on local storage
-    bookmarks = [];              
-    bookmarks.push(bookmark); // creating array of objects
-    localStorage.setItem("bookmark", JSON.stringify(bookmark)); //storing  as string
+
+
+
+
+const saveData = (bookmark) =>{
+    console.log(bookmarks); 
+    bookmarks.push(bookmark);
+    localStorage.setItem("bookmarks",JSON.stringify(bookmarks));
 };
 
-const getData = () => {             //fetching from local storage
-    if (localStorage.getItem("bookmark") !== null) {           //cheking if localStorage is empty for bookmark name
-        bookmarks = JSON.parse(localStorage.getItem("bookmark")); // again converting it into json format (array of objects)
-        const arr = [];
-        arr.push(bookmarks);
-        console.log(arr);
-
-        arr.forEach((bookmark)=>{     //now looping through each element for call
-            siteName = bookmark.websitename;
-            URLName = bookmark.siteurl;
-            createBookmark();        //now calling the function to create bookmark
-        });
-
-
-        storeElem();
-        
-        // // siteName = siteData[0];
-        // // URLName = siteData[1];
-        // createBookmark();
+const getData = ()=>{
+    if(localStorage.getItem("bookmarks") === null) {
+        console.log("do nothing!");
     }
     else{
-        let bookmarks = [];
-        bookmarks.push(bookmark);
-        localStorage.setItem("bookmarks",JSON.stringify(bookmarks));
-        bookmarks.push(bookmark);
+        var fetchdata = JSON.parse(localStorage.getItem("bookmarks"));
+        fetchdata.forEach(element => {
+        //    console.log(element.websitename);
+        //    console.log(element.siteurl); 
+        siteName = element.websitename;
+        URLName = element.siteurl;
+        createBookmark();
+        saveData(element);
+        });
     }
+}
+
+
+const storeElem = () =>{
+    let bookmark = {    //storing in objects for further loading as object on local storage
+        websitename: siteName,
+        siteurl: URLName
+    };
+    saveData(bookmark);
 };
+
 
 getData();
